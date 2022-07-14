@@ -10,20 +10,15 @@ Visualizzazione dinamica della lista contatti: tramite la direttiva v-for, visua
 
 body {
     height: 100vh;
+}
+
+#root {
     background: linear-gradient(to bottom,
             #009688 15%, #DADBD3 15% 100%);
 }
 
-.borderx {
-    /* border: 1px solid black; */
-}
-
-.bordery {
-    /* border: 1px solid red; */
-}
-
 .top-userdisplay {
-    height: 80px;
+    height: 10%
 }
 
 hr {
@@ -38,7 +33,11 @@ hr {
     background-image: url(../img/mine.jpg);
 }
 
-.notify {
+.notify{
+    height: 90px;
+}
+
+.bell {
     border-radius: 50%;
     background-color: white;
     padding: 10px;
@@ -50,6 +49,10 @@ img {
     max-height: 50px;
     max-width: 100%;
     border-radius: 50%;
+}
+
+.friendlist{
+    height: 70px;
 }
 
 i {
@@ -68,25 +71,20 @@ ul {
     min-width: 100%;
 }
 
-.flow-y {
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
 .chat-text {
-    height: calc(100% - 613px);
+    height: 15%;
     background-color: #F3EEEA;
 }
 
-.min-he{
+.min-he {
     min-height: 10px;
 }
 
-.time{
+.time {
     font-size: 0.7rem;
 }
 
-.my-messages { 
+.my-messages {
     width: 30%;
     background-color: #D5F9BA;
     border-radius: 10px;
@@ -97,5 +95,5 @@ ul {
     width: 30%;
     background-color: white;
     border-radius: 10px;
-    
+
 }
