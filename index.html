@@ -1,6 +1,8 @@
+<!-- DOCTYPE -->
 <!DOCTYPE html>
+<!-- LANGUAGE -->
 <html lang="en">
-
+<!-- BOILERPLATE -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +20,7 @@
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"></script>
     <!-- CUSTOM PARSE FORMAT PLUGIN -->
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/plugin/customParseFormat.js"></script>
-    <!-- STYLE SHEET -->
+    <!-- STYLE SHEET CSS -->
     <link rel="stylesheet" href="css/style.css">
     <!-- TITLE -->
     <title>Boolzapp</title>
@@ -27,7 +29,7 @@
 <body>
     <!-- MAIN CONTAINER WITH BACKGROUND -->
     <div id="root" class="d-flex align-items-center p-0 h-100">
-        <!-- CONTAINER CHAT -->
+        <!-- CONTAINER BOOLZAPP -->
         <main class="h-75 p-0 container d-flex bg-light shadow">
             <div class="row flex-column m-0 p-0 w-2 h-100">
                 <div class="col-12 border d-flex justify-content-between align-items-center top-userdisplay">
@@ -55,18 +57,20 @@
                 <!-- SEARCH FOR CONTACTS -->
                 <div class="col-12 d-flex align-items-center p-1">
                     <div class="w-100">
-                        <!-- INPUT CONTACTS -->
+                        <!-- INPUT SEARCH FOR CONTACTS -->
                         <input type="text" class="form-control empty" id="iconified"
                             placeholder="Cerca o inizia una nuova chat" />
                     </div>
                 </div>
                 <!-- FRIENDLIST -->
-                <div class="row overflow-auto">
+                <div class="row overflow-auto cursor">
                     <div v-for="(contact, i) in contacts"
                         class="col-12 friendlist d-flex justify-content-between align-items-center w-2" @click="changeActiveContact(i)">
                         <div>
-                            <img :src="'img/avatar' + contact.avatar + '.jpg'" alt=""><span>{{contact.name}}</span>
+                            <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="">
+                            <span>{{contact.name}}</span>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -99,11 +103,11 @@
                 <!-- CHAT INPUT + ICONS -->
                 <div class="col d-flex justify-content-between text-secondary align-items-center chat-text">
                     <i class="fa-solid fa-face-smile pe-2"></i>
-                    <input @keyup.enter="" class="form-control empty" type="text">
+                    <input @keyup.enter="sendMessage" class="form-control empty" type="text" placeholder="Scrivi qui..." v-model="message">
                     <i class="fa-solid fa-microphone ps-2"></i>
                 </div>
             </div>
-            </dmainiv>
+        </main>
     </div>
     <script src="js/script.js"></script>
 </body>

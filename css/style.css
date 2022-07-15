@@ -59,6 +59,10 @@ body {
     color: #8EDAFC;
 }
 
+.cursor:hover{
+    cursor: pointer;
+}
+
 /* INCREASE SIZES OF ALL ICONS */
 
 i {
