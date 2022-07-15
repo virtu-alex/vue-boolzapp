@@ -5,31 +5,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FONT AWESOME ICONS -->
     <script src="https://kit.fontawesome.com/3ec4a20eeb.js" crossorigin="anonymous"></script>
+    <!-- FONT AWESOME CLOUDFLARE CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- BOOTSTRAP FRAMEWORK -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <!-- CDN -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.4/dist/vue.js"></script>
+    <!-- DAY-JS -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"></script>
+    <!-- CUSTOM PARSE FORMAT PLUGIN -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/plugin/customParseFormat.js"></script>
+    <!-- STYLE SHEET -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- TITLE -->
     <title>Boolzapp</title>
 </head>
 
 <body>
+    <!-- MAIN CONTAINER WITH BACKGROUND -->
     <div id="root" class="d-flex align-items-center p-0 h-100">
-        <div class="h-75 p-0 container d-flex bg-light">
+        <!-- CONTAINER CHAT -->
+        <main class="h-75 p-0 container d-flex bg-light shadow">
             <div class="row flex-column m-0 p-0 w-2 h-100">
-                <div class="col-12 border d-flex justify-content-between align-items-center top-userdisplay w-2">
+                <div class="col-12 border d-flex justify-content-between align-items-center top-userdisplay">
+                    <!-- MY PROFILE PIC + NAME + ICONS -->
                     <div>
                         <img :src="'img/avatar' + user.avatar + '.jpg'" alt="">
                         <span>{{user.name}}</span>
                     </div>
-
-                    <div>
+                    <div class="text-secondary">
                         <i class="fa-solid fa-rotate px-2"></i>
                         <i class="fa-solid fa-message px-2"></i>
                         <i class="fa-solid fa-ellipsis-vertical px-2"></i>
                     </div>
                 </div>
+                <!-- NOTIFY + BELL ICON -->
                 <div class="col-12 notify d-flex align-items-center bg-lightblue">
                     <div class="pe-3">
                         <i class="fa-solid fa-bell-slash bell"></i>
@@ -39,59 +52,59 @@
                         <a class="text-secondary" href="#">Attiva notifiche desktop</a>
                     </div>
                 </div>
+                <!-- SEARCH FOR CONTACTS -->
                 <div class="col-12 d-flex align-items-center p-1">
                     <div class="w-100">
+                        <!-- INPUT CONTACTS -->
                         <input type="text" class="form-control empty" id="iconified"
-                            placeholder="Cerca o inizia una nuova chat"/>
+                            placeholder="Cerca o inizia una nuova chat" />
                     </div>
                 </div>
-                <div class="p-0 flow-y">
+                <!-- FRIENDLIST -->
+                <div class="row overflow-auto">
                     <div v-for="(contact, i) in contacts"
-                        class="col-12 friendlist d-flex justify-content-between align-items-center w-2">
+                        class="col-12 friendlist d-flex justify-content-between align-items-center w-2" @click="changeActiveContact(i)">
                         <div>
                             <img :src="'img/avatar' + contact.avatar + '.jpg'" alt=""><span>{{contact.name}}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row d-block w-100 m-0 p-0 h-100">
+            <!-- TOP BAR FRIEND SELECTED -->
+            <div class="row d-block w-100 m-0 p-0">
                 <div class="col-12 d-flex justify-content-between align-items-center top-userdisplay">
                     <div>
-                        <img src="img/avatar_1.jpg" alt=""><span>Michele</span>
+                        <!-- SELECTED FRIEND + PIC -->
+                        <img src="img/avatar_1.jpg" alt="">
+                        <span>Michele</span>
                     </div>
-                    <div>
+                    <!-- ICONS TOP RIGHT CORNER -->
+                    <div class="text-secondary">
                         <i class="fa-solid fa-magnifying-glass px-2"></i>
                         <i class="fa-solid fa-paperclip px-2"></i>
                         <i class="fa-solid fa-ellipsis-vertical px-2"></i>
                     </div>
                 </div>
-                <div class="col h-75 wa-bg flow-y">
-                    <div class="row py-5 h-100 flex-column">
-                        <div class="col-5 py-2 offset-7 my-messages mb-1"><span>Hai portato a spasso il cane?</span>
-                            <div class="col time text-end text-secondary">10/01/2020 15:30:55
+                <!-- CHAT MESSAGES -->
+                <div class="col h-75 wa-bg">
+                    <div class="row flex-column pt-4">
+                        <div v-for="message in contacts[active].messages" class="col-5 shadow mb-3"
+                            :class="message.status === 'sent' ? 'py-2 offset-7 my-messages' : 'offset-1 friend-messages'">
+                            <span>{{message.text}}</span>
+                            <div class="col time text-end text-secondary">{{message.date}}
                             </div>
                         </div>
-
-                        <div class="col-5 py-2 offset-7 my-messages mb-1"><span>Ricordati di dargli da mangiare!</span>
-                            <div class="col time text-end text-secondary">10/01/2020 15:50:00</div>
-                        </div>
-                        <div class="col-5 offset-1 friend-messages mb-1"><span>Tutto Fatto!</span>
-                            <div class="col time text-end text-secondary">10/01/2020 15:50:00</div>
-                        </div>
-
                     </div>
                 </div>
-                <div class="col d-flex justify-content-between align-items-center chat-text">
+                <!-- CHAT INPUT + ICONS -->
+                <div class="col d-flex justify-content-between text-secondary align-items-center chat-text">
                     <i class="fa-solid fa-face-smile pe-2"></i>
-                    <input class="form-control empty" type="text">
+                    <input @keyup.enter="" class="form-control empty" type="text">
                     <i class="fa-solid fa-microphone ps-2"></i>
                 </div>
             </div>
-        </div>
+            </dmainiv>
     </div>
-    <!-- <div id="root">
-        
-    </div> -->
     <script src="js/script.js"></script>
 </body>
 
