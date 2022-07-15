@@ -23,7 +23,7 @@ const root = new Vue({
         active: 0,
         message: '',
         user: {
-            name: 'Alessio',
+            name: 'Alessia',
             avatar: '_io'
         },
         contacts: [
@@ -91,7 +91,7 @@ const root = new Vue({
                 ],
             },
             {
-                name: 'Luisa',
+                name: 'Luiso',
                 avatar: '_4',
                 visible: true,
                 messages: [{
@@ -108,7 +108,6 @@ const root = new Vue({
             }
         ]
     }, computed: {
-
     },
     methods: {
         changeActiveContact(index) {
@@ -122,8 +121,17 @@ const root = new Vue({
             }
             this.contacts[this.active].messages.push(newMessage)
             this.message = ''
-
+            timeOut = setTimeout(this.cpuMessage, 1000)
+        },
+        cpuMessage() {
+            const cpuMessage = {
+                date: '10/01/2020 15:50:00',
+                text: 'Ok boss!',
+                status: 'received'
+            }
+            this.contacts[this.active].messages.push(cpuMessage)
         }
+
 
     }
 

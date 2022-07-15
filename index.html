@@ -76,11 +76,11 @@
             </div>
             <!-- TOP BAR FRIEND SELECTED -->
             <div class="row d-block w-100 m-0 p-0">
-                <div class="col-12 d-flex justify-content-between align-items-center top-userdisplay">
+                <div v-for="(contact, i) in contacts" v-if="active === i" class="col-12 d-flex justify-content-between align-items-center top-userdisplay">
                     <div>
                         <!-- SELECTED FRIEND + PIC -->
-                        <img src="img/avatar_1.jpg" alt="">
-                        <span>Michele</span>
+                        <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="">
+                        <span>{{contact.name}}</span>
                     </div>
                     <!-- ICONS TOP RIGHT CORNER -->
                     <div class="text-secondary">
