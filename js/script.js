@@ -22,6 +22,7 @@ const root = new Vue({
     data: {
         active: 0,
         message: '',
+        contactFilter: '',
         user: {
             name: 'Alessia',
             avatar: '_io'
@@ -108,6 +109,12 @@ const root = new Vue({
             }
         ]
     }, computed: {
+        filteredContacts: function () {
+            const filtered = this.contacts.filter(contact => {
+                return contact.name.toLowerCase().includes(this.contactFilter.toLowerCase())
+            })
+            return filtered
+        }
     },
     methods: {
         changeActiveContact(index) {

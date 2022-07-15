@@ -3,6 +3,7 @@
 <!-- LANGUAGE -->
 <html lang="en">
 <!-- BOILERPLATE -->
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -58,29 +59,30 @@
                 <div class="col-12 d-flex align-items-center p-1">
                     <div class="w-100">
                         <!-- INPUT SEARCH FOR CONTACTS -->
-                        <input type="text" class="form-control empty" id="iconified"
-                            placeholder="Cerca o inizia una nuova chat" />
+                        <input type="text" class="form-control empty" placeholder="Cerca o inizia una nuova chat"
+                            v-model="contactFilter" />
                     </div>
                 </div>
                 <!-- FRIENDLIST -->
                 <div class="row overflow-auto cursor">
-                    <div v-for="(contact, i) in contacts"
-                        class="col-12 friendlist d-flex justify-content-between align-items-center w-2" @click="changeActiveContact(i)">
+                    <div v-for="(contact, i) in filteredContacts"
+                        class="col-12 friendlist d-flex justify-content-between align-items-center w-2"
+                        @click="changeActiveContact(i)">
                         <div>
                             <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="">
                             <span>{{contact.name}}</span>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
             <!-- TOP BAR FRIEND SELECTED -->
             <div class="row d-block w-100 m-0 p-0">
-                <div v-for="(contact, i) in contacts" v-if="active === i" class="col-12 d-flex justify-content-between align-items-center top-userdisplay">
+                <div class="col-12 d-flex justify-content-between align-items-center top-userdisplay">
                     <div>
                         <!-- SELECTED FRIEND + PIC -->
-                        <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="">
-                        <span>{{contact.name}}</span>
+                        <img :src="'img/avatar' + contacts[active].avatar + '.jpg'" alt="">
+                        <span>{{contacts[active].name}}</span>
                     </div>
                     <!-- ICONS TOP RIGHT CORNER -->
                     <div class="text-secondary">
@@ -103,7 +105,8 @@
                 <!-- CHAT INPUT + ICONS -->
                 <div class="col d-flex justify-content-between text-secondary align-items-center chat-text">
                     <i class="fa-solid fa-face-smile pe-2"></i>
-                    <input @keyup.enter="sendMessage" class="form-control empty" type="text" placeholder="Scrivi qui..." v-model="message">
+                    <input @keyup.enter="sendMessage" class="form-control empty" type="text" placeholder="Scrivi qui..."
+                        v-model="message">
                     <i class="fa-solid fa-microphone ps-2"></i>
                 </div>
             </div>
