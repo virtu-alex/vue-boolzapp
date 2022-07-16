@@ -20,14 +20,20 @@ const date = dayjs('2021-06-22 15:10:00').format('DD/MM/YYYY HH:mm:ss')
 const root = new Vue({
     el: '#root',
     data: {
+        //ACTIVE INDEX
         active: 0,
+        //VARIABLE STARTING AS EMPTY STRING FOR MESSAGES
         message: '',
+        //VARIABLE STARTING AS EMPTY STRING FOR FILTERING CONTACTS
         contactFilter: '',
+        //MY PERSONAL CONTACT
         user: {
-            name: 'Alessia',
-            avatar: '_io'
+            name: 'Alessio',
+            avatar: '_4'
         },
+        //CONTACTS FRIENDLIST
         contacts: [
+            //1st CONTACT
             {
                 name: 'Michele',
                 avatar: '_1',
@@ -49,6 +55,7 @@ const root = new Vue({
                 },
                 ],
             },
+            //2nd CONTACT
             {
                 name: 'Fabio',
                 avatar: '_2',
@@ -64,12 +71,35 @@ const root = new Vue({
                     status: 'received'
                 },
                 {
-                    date: '20/03/2020 16:35:00',
+                    date: date,
                     text: 'Mi piacerebbe ma devo andare a fare la spesa.',
                     status: 'sent'
                 }
                 ],
             },
+            //3rd CONTACT
+            {
+                name: 'Simone',
+                avatar: '_2',
+                visible: true,
+                messages: [{
+                    date: date,
+                    text: 'Che bella giornata!',
+                    status: 'sent'
+                },
+                {
+                    date: '20/03/2020 16:30:55',
+                    text: 'Penso che resto a casa a giocare al PC',
+                    status: 'received'
+                },
+                {
+                    date: '20/03/2020 16:35:00',
+                    text: 'Daje, pure io. Logga discord',
+                    status: 'sent'
+                }
+                ],
+            },
+            //4th CONTACT
             {
                 name: 'Samuele',
                 avatar: '_3',
@@ -91,24 +121,31 @@ const root = new Vue({
                 }
                 ],
             },
+            //5th CONTACT
             {
-                name: 'Luiso',
-                avatar: '_4',
+                name: 'Fabiola',
+                avatar: '_io',
                 visible: true,
                 messages: [{
-                    date: '10/01/2020 15:30:55',
-                    text: 'Lo sai che ha aperto una nuova pizzeria?',
+                    date: '20/03/2020 16:30:00',
+                    text: 'Ciao come stai?',
                     status: 'sent'
                 },
                 {
-                    date: '10/01/2020 15:50:00',
-                    text: 'Si, ma preferirei andare al cinema',
+                    date: '20/03/2020 16:30:55',
+                    text: 'Bene grazie! Stasera ci vediamo?',
                     status: 'received'
+                },
+                {
+                    date: '20/03/2020 16:35:00',
+                    text: 'Mi piacerebbe ma devo andare a fare la spesa.',
+                    status: 'sent'
                 }
-                ]
-            }
+                ],
+            },
         ]
     }, computed: {
+        //FILTERED CONTACTS
         filteredContacts: function () {
             const filtered = this.contacts.filter(contact => {
                 return contact.name.toLowerCase().includes(this.contactFilter.toLowerCase())
@@ -120,6 +157,7 @@ const root = new Vue({
         changeActiveContact(index) {
             this.active = index
         },
+        //MESSAGES SENT BY ME
         sendMessage() {
             const newMessage = {
                 date: '10/01/2020 15:50:00',
@@ -130,6 +168,7 @@ const root = new Vue({
             this.message = ''
             timeOut = setTimeout(this.cpuMessage, 1000)
         },
+        //MESSAGE RECEIVED FROM CPU
         cpuMessage() {
             const cpuMessage = {
                 date: '10/01/2020 15:50:00',

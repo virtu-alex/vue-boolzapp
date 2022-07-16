@@ -35,6 +35,10 @@ body {
     width: 350px;
 }
 
+.overflow{
+    overflow-y: auto;
+}
+
 /* WHATTSAPP BACKGROUND CHAT */
 
 .wa-bg {
