@@ -1,5 +1,3 @@
-
-
 /* UNIVERSAL */
 
 * {
@@ -18,11 +16,11 @@ body {
 
 #root {
     background-image: linear-gradient(to bottom,
-    #009688 15%, #DADBD3 15% 100%);
+            #009688 15%, #DADBD3 15% 100%);
 }
 
-.shadow{
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+.shadow {
+    box-shadow: rgba(0, 0, 0, 0) 0px 5px 15px;
 }
 
 /* TOP-BARS */
@@ -35,7 +33,7 @@ body {
     width: 350px;
 }
 
-.overflow{
+.overflow {
     overflow-y: auto;
 }
 
@@ -52,8 +50,8 @@ body {
     background-color: #8EDAFC
 }
 
-.notify{
-    height: 90px;
+.notify {
+    height: 15%;
 }
 
 .bell {
@@ -63,7 +61,7 @@ body {
     color: #8EDAFC;
 }
 
-.cursor:hover{
+.cursor:hover {
     cursor: pointer;
 }
 
@@ -77,27 +75,33 @@ i {
 
 ul {
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 /* UNIVERSAL IMAGE RESOLUTION */
 
 img {
     padding-right: 5px;
-    max-height: 50px;
-    max-width: 100%;
     border-radius: 50%;
+    height: 100%;
 }
 
 /* LEFT SIDE FRIEND LIST */
 
-.friendlist{
+.friendlist {
     height: 70px;
 }
 
 /* SEARCH BAR (ABOVE FRIENDLIST) */
 
 .search-contacts {
-    min-width: 100%;
+    height: 10%;
+}
+
+.friend-list-container {
+    height: 65%;
+    overflow-y: scroll
 }
 
 /* CHAT INPUT */
@@ -129,4 +133,21 @@ img {
     background-color: white;
     border-radius: 10px;
 
+}
+
+
+
+.dropdown.position-absolute {
+    top: 0;
+    right: 0;
+    transform: translate(100%, -100%);
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #233138;
+    color: white;
 }

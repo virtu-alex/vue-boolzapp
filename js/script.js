@@ -10,8 +10,10 @@ Milestone 3
 Aggiunta di un messaggio: l’utente scrive un testo nella parte bassa e digitando “enter” il testo viene aggiunto al thread sopra, come messaggio verde
 Risposta dall’interlocutore: ad ogni inserimento di un messaggio, l’utente riceverà un “ok” come risposta, che apparirà dopo 1 secondo.
 Milestone 4
-Ricerca utenti: scrivendo qualcosa nell’input a sinistra, vengono visualizzati solo i contatti il cui nome contiene le lettere inserite (es, Marco, Matteo Martina -> Scrivo “mar” rimangono solo Marco e Martina)*/
-
+Ricerca utenti: scrivendo qualcosa nell’input a sinistra, vengono visualizzati solo i contatti il cui nome contiene le lettere inserite (es, Marco, Matteo Martina -> Scrivo “mar” rimangono solo Marco e Martina)
+Milestone 5 - BONUS
+●      ////Cancella messaggio: cliccando sul messaggio appare un menu a tendina che permette di cancellare il messaggio selezionato
+●      Visualizzazione ora e ultimo messaggio inviato/ricevuto nella lista dei contatti*/
 
 dayjs.extend(dayjs_plugin_customParseFormat)
 
@@ -143,6 +145,48 @@ const root = new Vue({
                 }
                 ],
             },
+            {
+                name: 'Fabiola',
+                avatar: '_io',
+                visible: true,
+                messages: [{
+                    date: '20/03/2020 16:30:00',
+                    text: 'Ciao come stai?',
+                    status: 'sent'
+                },
+                {
+                    date: '20/03/2020 16:30:55',
+                    text: 'Bene grazie! Stasera ci vediamo?',
+                    status: 'received'
+                },
+                {
+                    date: '20/03/2020 16:35:00',
+                    text: 'Mi piacerebbe ma devo andare a fare la spesa.',
+                    status: 'sent'
+                }
+                ],
+            },
+            {
+                name: 'Fabiola',
+                avatar: '_io',
+                visible: true,
+                messages: [{
+                    date: '20/03/2020 16:30:00',
+                    text: 'Ciao come stai?',
+                    status: 'sent'
+                },
+                {
+                    date: '20/03/2020 16:30:55',
+                    text: 'Bene grazie! Stasera ci vediamo?',
+                    status: 'received'
+                },
+                {
+                    date: '20/03/2020 16:35:00',
+                    text: 'Mi piacerebbe ma devo andare a fare la spesa.',
+                    status: 'sent'
+                }
+                ],
+            },
         ]
     }, computed: {
         //FILTERED CONTACTS
@@ -176,6 +220,14 @@ const root = new Vue({
                 status: 'received'
             }
             this.contacts[this.active].messages.push(cpuMessage)
+        }, deleteMessage(index) {
+            this.contacts[this.active].messages.splice(index, 1);
+        }, showDropdown(event) {
+            console.log(event)
+            const msgEl = event.currentTarget
+            const dropdownEl = msgEl.getElementsByClassName('dropdown')[0]
+            dropdownEl.classList.toggle('d-none')
+
         }
 
 

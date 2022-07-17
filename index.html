@@ -3,6 +3,7 @@
 <!-- LANGUAGE -->
 <html lang="en">
 <!-- BOILERPLATE -->
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +15,7 @@
     <!-- BOOTSTRAP FRAMEWORK -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <!-- CDN -->
+    <!-- CDN VUE-JS -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.4/dist/vue.js"></script>
     <!-- DAY-JS -->
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"></script>
@@ -33,13 +34,11 @@
     <div id="root" class="d-flex align-items-center p-0 h-100">
         <!-- CONTAINER BOOLZAPP -->
         <main class="h-75 p-0 container d-flex bg-light shadow">
-            <div class="row flex-column m-0 p-0 w-2 h-100">
+            <div class="row h-100 flex-column m-0 p-0 w-2 h-100">
                 <div class="col-12 border d-flex justify-content-between align-items-center top-userdisplay">
                     <!-- MY PROFILE PIC + NAME + ICONS -->
-                    <div>
                         <img :src="'img/avatar' + user.avatar + '.jpg'" alt="">
-                        <span>{{user.name}}</span>
-                    </div>
+                        <span class="flex-grow-1">{{user.name}}</span>
                     <div class="text-secondary">
                         <i class="fa-solid fa-rotate px-2"></i>
                         <i class="fa-solid fa-message px-2"></i>
@@ -57,35 +56,33 @@
                     </div>
                 </div>
                 <!-- SEARCH FOR CONTACTS -->
-                <div class="col-12 d-flex align-items-center p-1">
+                <div class="col-12 search-contacts d-flex align-items-center p-1">
                     <div class="w-100">
                         <!-- INPUT SEARCH FOR CONTACTS -->
                         <input type="text" class="form-control empty" placeholder="Cerca o inizia una nuova chat"
                             v-model="contactFilter" />
                     </div>
                 </div>
-                <!-- FRIENDLIST -->
-                <div class="row overflow-auto cursor">
-                    <div v-for="(contact, i) in filteredContacts"
-                        class="col-12 friendlist d-flex justify-content-between align-items-center w-2"
-                        @click="changeActiveContact(i)">
-                        <div>
-                            <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="">
-                            <span>{{contact.name}}</span>
-                        </div>
+                <div class="col-12 friend-list-container ">
+                    <!-- FRIENDLIST -->
+                    <div class="row cursor">
+                        <div v-for="(contact, i) in filteredContacts"
+                            class="col-12 friendlist d-flex justify-content-between align-items-center w-2"
+                            @click="changeActiveContact(i)">
+                                <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="">
+                                <span class="flex-grow-1">{{contact.name}}</span>
 
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- TOP BAR FRIEND SELECTED -->
             <div class="row d-block w-100 m-0 p-0">
                 <div class="col-12 d-flex justify-content-between align-items-center top-userdisplay">
-                    <div>
                         <!-- SELECTED FRIEND + PIC -->
                         <img :src="'img/avatar' + contacts[active].avatar + '.jpg'" alt="">
-                        <span>{{contacts[active].name}}</span>
-                    </div>
-                        
+                        <span class="flex-grow-1">{{contacts[active].name}}</span>
+
                     <!-- ICONS TOP RIGHT CORNER -->
                     <div class="text-secondary">
                         <i class="fa-solid fa-magnifying-glass px-2"></i>
@@ -96,10 +93,17 @@
                 <!-- CHAT MESSAGES -->
                 <div class="col h-75 wa-bg">
                     <div class="row flex-column pt-4">
-                        <div v-for="message in contacts[active].messages" class="col-5 shadow mb-3"
+
+                        <div @click="showDropdown" v-for="(message, i) in contacts[active].messages"
+                            class="position-relative col-5 shadow mb-3"
                             :class="message.status === 'sent' ? 'py-2 offset-7 my-messages' : 'offset-1 friend-messages'">
                             <span>{{message.text}}</span>
                             <div class="col time text-end text-secondary">{{message.date}}
+                            </div>
+                            <div class="dropdown d-none position-absolute">
+                                <ul class="actions">
+                                    <li @click="deleteMessage(i)">Delete message</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
