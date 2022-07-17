@@ -15,10 +15,11 @@ Milestone 5 - BONUS
 ●      ////Cancella messaggio: cliccando sul messaggio appare un menu a tendina che permette di cancellare il messaggio selezionato
 ●      Visualizzazione ora e ultimo messaggio inviato/ricevuto nella lista dei contatti*/
 
+
 dayjs.extend(dayjs_plugin_customParseFormat)
 
 const date = dayjs('2021-06-22 15:10:00').format('DD/MM/YYYY HH:mm:ss')
-
+datex = dayjs('2021-06-22 15:10:00').format('DD/MM/YYYY HH:mm:ss')
 const root = new Vue({
     el: '#root',
     data: {
@@ -29,6 +30,7 @@ const root = new Vue({
         //VARIABLE STARTING AS EMPTY STRING FOR FILTERING CONTACTS
         contactFilter: '',
         //MY PERSONAL CONTACT
+        datex : dayjs('2021-06-22 15:10:00').format('DD/MM/YYYY HH:mm:ss'),
         user: {
             name: 'Alessio',
             avatar: '_4'
@@ -82,7 +84,7 @@ const root = new Vue({
             //3rd CONTACT
             {
                 name: 'Simone',
-                avatar: '_2',
+                avatar: '_3',
                 visible: true,
                 messages: [{
                     date: date,
@@ -104,7 +106,7 @@ const root = new Vue({
             //4th CONTACT
             {
                 name: 'Samuele',
-                avatar: '_3',
+                avatar: '_4',
                 visible: true,
                 messages: [{
                     date: '28/03/2020 10:10:40',
@@ -146,8 +148,50 @@ const root = new Vue({
                 ],
             },
             {
-                name: 'Fabiola',
+                name: 'Marco',
+                avatar: '_5',
+                visible: true,
+                messages: [{
+                    date: '10/01/2020 15:30:55',
+                    text: 'Hai portato a spasso il cane?',
+                    status: 'sent'
+                },
+                {
+                    date: '10/01/2020 15:50:00',
+                    text: 'Ricordati di dargli da mangiare',
+                    status: 'sent'
+                },
+                {
+                    date: '10/01/2020 16:15:22',
+                    text: 'Tutto fatto!',
+                    status: 'received'
+                },
+                ],
+            },
+            {
+                name: 'Martina',
                 avatar: '_io',
+                visible: true,
+                messages: [{
+                    date: '28/03/2020 10:10:40',
+                    text: 'La Marianna va in campagna',
+                    status: 'received'
+                },
+                {
+                    date: '28/03/2020 10:20:10',
+                    text: 'Sicuro di non aver sbagliato chat?',
+                    status: 'sent'
+                },
+                {
+                    date: '28/03/2020 16:15:22',
+                    text: 'Ah scusa!',
+                    status: 'received'
+                }
+                ],
+            },
+            {
+                name: 'Andrea',
+                avatar: '_6',
                 visible: true,
                 messages: [{
                     date: '20/03/2020 16:30:00',
@@ -160,15 +204,15 @@ const root = new Vue({
                     status: 'received'
                 },
                 {
-                    date: '20/03/2020 16:35:00',
+                    date: date,
                     text: 'Mi piacerebbe ma devo andare a fare la spesa.',
                     status: 'sent'
                 }
                 ],
             },
             {
-                name: 'Fabiola',
-                avatar: '_io',
+                name: 'Max',
+                avatar: '_7',
                 visible: true,
                 messages: [{
                     date: '20/03/2020 16:30:00',
@@ -181,7 +225,28 @@ const root = new Vue({
                     status: 'received'
                 },
                 {
-                    date: '20/03/2020 16:35:00',
+                    date: date,
+                    text: 'Mi piacerebbe ma devo andare a fare la spesa.',
+                    status: 'sent'
+                }
+                ],
+            },
+            {
+                name: 'Kenny',
+                avatar: '_8',
+                visible: true,
+                messages: [{
+                    date: '20/03/2020 16:30:00',
+                    text: 'Ciao come stai?',
+                    status: 'sent'
+                },
+                {
+                    date: '20/03/2020 16:30:55',
+                    text: 'Bene grazie! Stasera ci vediamo?',
+                    status: 'received'
+                },
+                {
+                    date: date,
                     text: 'Mi piacerebbe ma devo andare a fare la spesa.',
                     status: 'sent'
                 }
@@ -215,7 +280,7 @@ const root = new Vue({
         //MESSAGE RECEIVED FROM CPU
         cpuMessage() {
             const cpuMessage = {
-                date: '10/01/2020 15:50:00',
+                date: this.date,
                 text: 'Ok boss!',
                 status: 'received'
             }
@@ -227,11 +292,7 @@ const root = new Vue({
             const msgEl = event.currentTarget
             const dropdownEl = msgEl.getElementsByClassName('dropdown')[0]
             dropdownEl.classList.toggle('d-none')
-
         }
-
-
     }
-
 })
 
