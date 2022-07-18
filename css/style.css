@@ -16,7 +16,7 @@ body {
 
 #root {
     background-image: linear-gradient(to bottom,
-            #009688 15%, #DADBD3 15% 100%);
+     #009688 15%, #DADBD3 15% 100%);
 }
 
 .shadow {
@@ -135,6 +135,8 @@ img {
 
 }
 
+/* LAST MESSAGE + DATE */
+
 .last-seen{
     height: 0.7rem;
     font-size: 0.7rem;
@@ -142,20 +144,26 @@ img {
     color: gray;
 }
 
+/* ONCLICK DROPDOWN  */
+
 .dropdown.position-absolute {
     top: 0;
     right: 0;
     transform: translate(100%, -100%);
 }
 
+/* DROPDOWN ACTIONS LIST */
+
 .actions {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #233138;
     color: white;
+    background-color: #233138;
 }
+
+/* HOVER EFFECT ON FRIENDLIST */
 
 .bg-hover:hover{
     background-color: #597b8b;

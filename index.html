@@ -87,7 +87,6 @@
                     <!-- SELECTED FRIEND + PIC -->
                     <img :src="'img/avatar' + activeContact.avatar + '.jpg'" alt="">
                     <span class="flex-grow-1">{{activeContact.name}}</span>
-
                     <!-- ICONS TOP RIGHT CORNER -->
                     <div class="text-secondary">
                         <i class="fa-solid fa-magnifying-glass px-2"></i>
@@ -106,7 +105,7 @@
                             <div class="col time text-end text-secondary">{{message.date}}
                             </div>
                             <div class="dropdown d-none position-absolute">
-                                <ul class="action">
+                                <ul class="actions">
                                     <li @click="deleteMessage(i)">Delete message</li>
                                 </ul>
                             </div>
