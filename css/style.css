@@ -135,7 +135,12 @@ img {
 
 }
 
-
+.last-seen{
+    height: 0.7rem;
+    font-size: 0.7rem;
+    line-height: 20px;
+    color: gray;
+}
 
 .dropdown.position-absolute {
     top: 0;
@@ -150,4 +155,8 @@ img {
     justify-content: center;
     background-color: #233138;
     color: white;
+}
+
+.bg-hover:hover{
+    background-color: #597b8b;
 }

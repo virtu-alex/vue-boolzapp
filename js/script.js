@@ -13,24 +13,24 @@ Milestone 4
 Ricerca utenti: scrivendo qualcosa nell’input a sinistra, vengono visualizzati solo i contatti il cui nome contiene le lettere inserite (es, Marco, Matteo Martina -> Scrivo “mar” rimangono solo Marco e Martina)
 Milestone 5 - BONUS
 ●      ////Cancella messaggio: cliccando sul messaggio appare un menu a tendina che permette di cancellare il messaggio selezionato
-●      Visualizzazione ora e ultimo messaggio inviato/ricevuto nella lista dei contatti*/
+●      ////Visualizzazione ora e ultimo messaggio inviato/ricevuto nella lista dei contatti*/
 
 
 dayjs.extend(dayjs_plugin_customParseFormat)
 
 const date = dayjs('2021-06-22 15:10:00').format('DD/MM/YYYY HH:mm:ss')
-datex = dayjs('2021-06-22 15:10:00').format('DD/MM/YYYY HH:mm:ss')
 const root = new Vue({
     el: '#root',
     data: {
         //ACTIVE INDEX
         active: 0,
+        activeContact: null,
         //VARIABLE STARTING AS EMPTY STRING FOR MESSAGES
         message: '',
         //VARIABLE STARTING AS EMPTY STRING FOR FILTERING CONTACTS
         contactFilter: '',
         //MY PERSONAL CONTACT
-        datex : dayjs('2021-06-22 15:10:00').format('DD/MM/YYYY HH:mm:ss'),
+        datex: dayjs('2021-06-22 15:10:00').format('DD/MM/YYYY HH:mm:ss'),
         user: {
             name: 'Alessio',
             avatar: '_4'
@@ -256,20 +256,24 @@ const root = new Vue({
     }, computed: {
         //FILTERED CONTACTS
         filteredContacts: function () {
-            const filtered = this.contacts.filter(contact => {
+            return this.contacts.filter(contact => {
                 return contact.name.toLowerCase().includes(this.contactFilter.toLowerCase())
             })
-            return filtered
         }
+    },
+    created() {
+        this.activeContact = this.filteredContacts[0]
     },
     methods: {
         changeActiveContact(index) {
             this.active = index
+            this.activeContact = this.filteredContacts[index]
         },
         //MESSAGES SENT BY ME
         sendMessage() {
+            if (!this.message) return;
             const newMessage = {
-                date: '10/01/2020 15:50:00',
+                date: new Date().toLocaleString(),
                 text: this.message,
                 status: 'sent'
             }
@@ -280,7 +284,7 @@ const root = new Vue({
         //MESSAGE RECEIVED FROM CPU
         cpuMessage() {
             const cpuMessage = {
-                date: this.date,
+                date: new Date().toLocaleString(),
                 text: 'Ok boss!',
                 status: 'received'
             }
@@ -288,7 +292,6 @@ const root = new Vue({
         }, deleteMessage(index) {
             this.contacts[this.active].messages.splice(index, 1);
         }, showDropdown(event) {
-            console.log(event)
             const msgEl = event.currentTarget
             const dropdownEl = msgEl.getElementsByClassName('dropdown')[0]
             dropdownEl.classList.toggle('d-none')

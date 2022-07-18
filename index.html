@@ -1,5 +1,6 @@
 <!-- DOCTYPE -->
 <!DOCTYPE html>
+
 <!-- LANGUAGE -->
 <html lang="en">
 <!-- BOILERPLATE -->
@@ -24,7 +25,7 @@
     <!-- STYLE SHEET CSS -->
     <link rel="stylesheet" href="css/style.css">
     <!-- LOGO TITLE -->
-    <link rel="icon" href="img/wa-logo1.png" type="image/icon type">
+    <link rel="icon" href="img/wa-logo1.png" type="image/icon">
     <!-- TITLE -->
     <title>Boolzapp</title>
 </head>
@@ -35,10 +36,10 @@
         <!-- CONTAINER BOOLZAPP -->
         <main class="h-75 p-0 container d-flex bg-light shadow">
             <div class="row h-100 flex-column m-0 p-0 w-2 h-100">
-                <div class="col-12 border d-flex justify-content-between align-items-center top-userdisplay">
+                <div class="col-12 p-2 border d-flex justify-content-between align-items-center top-userdisplay">
                     <!-- MY PROFILE PIC + NAME + ICONS -->
-                        <img :src="'img/avatar' + user.avatar + '.jpg'" alt="">
-                        <span class="flex-grow-1">{{user.name}}</span>
+                    <img :src="'img/avatar' + user.avatar + '.jpg'" alt="">
+                    <span class="flex-grow-1">{{user.name}}</span>
                     <div class="text-secondary">
                         <i class="fa-solid fa-rotate px-2"></i>
                         <i class="fa-solid fa-message px-2"></i>
@@ -63,25 +64,29 @@
                             v-model="contactFilter" />
                     </div>
                 </div>
-                <div class="col-12 friend-list-container ">
+                <div class="col-12 friend-list-container">
                     <!-- FRIENDLIST -->
                     <div class="row cursor">
                         <div v-for="(contact, i) in filteredContacts"
-                            class="col-12 friendlist d-flex justify-content-between align-items-center w-2"
+                            class="bg-hover col-12 friendlist p-2 d-flex justify-content-between align-items-center w-2"
                             @click="changeActiveContact(i)">
-                                <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="">
-                                <span class="flex-grow-1">{{contact.name}}</span>
+                            <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="">
+                            <span class="flex-grow-1">{{contact.name}}</span>
+                            <div class="w-50 d-flex flex-column-reverse">
+                                <span class="last-seen">{{contact.messages[contact.messages.length -1].date}}</span>
+                                <span class="last-seen">{{contact.messages[contact.messages.length -1].text.substring(0, 10)}}...</span>
+                            </div>
 
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- TOP BAR FRIEND SELECTED -->
             <div class="row d-block w-100 m-0 p-0">
-                <div class="col-12 d-flex justify-content-between align-items-center top-userdisplay">
-                        <!-- SELECTED FRIEND + PIC -->
-                        <img :src="'img/avatar' + contacts[active].avatar + '.jpg'" alt="">
-                        <span class="flex-grow-1">{{contacts[active].name}}</span>
+                <!-- TOP BAR FRIEND SELECTED -->
+                <div class="col-12 p-2 d-flex justify-content-between align-items-center top-userdisplay">
+                    <!-- SELECTED FRIEND + PIC -->
+                    <img :src="'img/avatar' + activeContact.avatar + '.jpg'" alt="">
+                    <span class="flex-grow-1">{{activeContact.name}}</span>
 
                     <!-- ICONS TOP RIGHT CORNER -->
                     <div class="text-secondary">
@@ -101,7 +106,7 @@
                             <div class="col time text-end text-secondary">{{message.date}}
                             </div>
                             <div class="dropdown d-none position-absolute">
-                                <ul class="actions">
+                                <ul class="action">
                                     <li @click="deleteMessage(i)">Delete message</li>
                                 </ul>
                             </div>
@@ -112,7 +117,7 @@
                 <div class="col d-flex justify-content-between text-secondary align-items-center chat-text">
                     <i class="fa-solid fa-face-smile pe-2"></i>
                     <input @keyup.enter="sendMessage" class="form-control empty" type="text" placeholder="Scrivi qui..."
-                        v-model="message">
+                        v-model.trim="message">
                     <i class="fa-solid fa-microphone ps-2"></i>
                 </div>
             </div>
