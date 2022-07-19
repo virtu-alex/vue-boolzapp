@@ -97,8 +97,7 @@
                 <!-- CHAT MESSAGES -->
                 <div class="col h-75 wa-bg">
                     <div class="row flex-column pt-4">
-
-                        <div @click="showDropdown" v-for="(message, i) in contacts[active].messages"
+                        <div @click="showDropdown" v-for="(message, i) in filteredContacts[active].messages"
                             class="position-relative col-5 shadow mb-3"
                             :class="message.status === 'sent' ? 'py-2 offset-7 my-messages' : 'offset-1 friend-messages'">
                             <span>{{message.text}}</span>

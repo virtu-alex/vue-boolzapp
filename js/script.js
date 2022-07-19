@@ -267,6 +267,7 @@ const root = new Vue({
     methods: {
         changeActiveContact(index) {
             this.active = index
+            //save reference to last clicked contact element
             this.activeContact = this.filteredContacts[index]
         },
         //MESSAGES SENT BY ME
@@ -277,7 +278,7 @@ const root = new Vue({
                 text: this.message,
                 status: 'sent'
             }
-            this.contacts[this.active].messages.push(newMessage)
+            this.filteredContacts[this.active].messages.push(newMessage)
             this.message = ''
             timeOut = setTimeout(this.cpuMessage, 1000)
         },
@@ -288,9 +289,9 @@ const root = new Vue({
                 text: 'Ok boss!',
                 status: 'received'
             }
-            this.contacts[this.active].messages.push(cpuMessage)
+            this.filteredContacts[this.active].messages.push(cpuMessage)
         }, deleteMessage(index) {
-            this.contacts[this.active].messages.splice(index, 1);
+            this.filteredContacts[this.active].messages.splice(index, 1);
         }, showDropdown(event) {
             const msgEl = event.currentTarget
             const dropdownEl = msgEl.getElementsByClassName('dropdown')[0]
